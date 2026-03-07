@@ -639,6 +639,16 @@ export default function App() {
                 <h4 className="text-white font-medium mb-2">Sales & Distribution / Customer Experience</h4>
                 <p className="text-sm text-zinc-500">마케팅, 퍼블리싱, 온라인 서비스</p>
               </div>
+
+              <div className="bg-zinc-900/50 p-6 rounded-xl border border-white/5">
+                <h4 className="text-white font-medium mb-2">Core Service & IT/QA</h4>
+                <p className="text-sm text-zinc-500">기술 연구/개발/관리, 게임 검수</p>
+              </div>
+
+              <div className="bg-zinc-900/50 p-6 rounded-xl border border-white/5">
+                <h4 className="text-white font-medium mb-2">IP Business</h4>
+                <p className="text-sm text-zinc-500">IP 기반의 문화 콘텐츠 및 상품 제작</p>
+              </div>
             </FadeIn>
 
             {/* Consumer Facilities */}
