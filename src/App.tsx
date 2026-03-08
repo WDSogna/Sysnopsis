@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { ChevronDown, Sword, Shield, Sparkles, Building2, Users, Map, MonitorPlay, ShoppingBag, Coffee, BookOpen, PenTool, DoorOpen } from 'lucide-react';
+import { ChevronDown, Sword, Shield, Sparkles, Building2, Users, Map, MonitorPlay, ShoppingBag, Coffee, BookOpen, PenTool, DoorOpen, Handshake } from 'lucide-react';
 
 const FadeIn = ({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string }) => (
   <motion.div
@@ -325,6 +325,9 @@ export default function App() {
                 <p className="text-zinc-400 leading-relaxed">
                   고유한 하이 판타지 세계관을 창조하여 소비자들이 즐길 수 있도록 만드는 환상향의 경영 집단이다.
                 </p>
+                <p className="text-white font-medium text-lg mt-8 border-l-2 border-red-500 pl-4 leading-relaxed">
+                  업무 상으로는 첨단과 지속적인 발전을 추구하나, 창작하는 세계는 환상과 새로움으로 가득 차 있다.
+                </p>
               </div>
               <div className="relative h-[400px] w-full mt-12 lg:mt-0 group">
                 <img src="https://i.postimg.cc/0N15jgyM/image.png" alt="High Fantasy 1" className="absolute top-0 left-0 w-[65%] h-64 object-cover rounded-2xl shadow-2xl border border-white/10 z-10 group-hover:-translate-y-2 group-hover:-translate-x-2 transition-transform duration-500" referrerPolicy="no-referrer" />
@@ -524,7 +527,10 @@ export default function App() {
                 ></iframe>
               </div>
               <div className="order-1 lg:order-2">
-                <h3 className="text-3xl text-white mb-6">공간 경험으로써의 판타지</h3>
+                <h3 className="text-3xl text-white mb-6 leading-tight">
+                  공간 경험으로써의 판타지<br />
+                  <span className="text-2xl text-zinc-300 mt-2 inline-block">: 현대적 디자인과 비일상적 연출</span>
+                </h3>
                 <p className="text-zinc-400 leading-relaxed mb-6">
                   추구하는 것은 판타지 속 디자인 형태를 차용하거나 분위기를 그대로 표현하는 것이 아니다. 현대 건축에서 쓰이고 있거나 필요로 하는 기능, 프로그램, 디자인 등을 비일상적으로 표현하고 조합하여 시각만이 아닌 공감각적으로 창작자와 소비자가 원하는 환상을 경험할 수 있는 세계를 구축한다.
                 </p>
@@ -553,7 +559,7 @@ export default function App() {
             </div>
           </FadeIn>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <FadeIn delay={0.1}>
               <div className="group relative overflow-hidden rounded-3xl bg-zinc-900 border border-white/5 p-10 h-full">
                 <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -597,6 +603,22 @@ export default function App() {
                   </h3>
                   <p className="text-zinc-400 leading-relaxed text-lg">
                     게임에 관심이 없으나 그 외 다양한 관심사를 가진 여러 사람들도 끌어들일 수 있도록 다양한 문화 콘텐츠와 시설을 갖춘 도시 광장. 이들을 끌어들임으로써 신규 유저 유입 가능성 강화.
+                  </p>
+                </div>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.7}>
+              <div className="group relative overflow-hidden rounded-3xl bg-zinc-900 border border-white/5 p-10 h-full">
+                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <Handshake className="w-32 h-32 text-white" />
+                </div>
+                <div className="relative z-10">
+                  <h3 className="font-display text-3xl text-white mb-6 flex items-center gap-4">
+                    <span className="text-red-500">04.</span> 협력자
+                  </h3>
+                  <p className="text-zinc-400 leading-relaxed text-lg">
+                    게임은 타 기업 간의 콜라보가 활발하고, 특히 스퀘어 에닉스의 경우에는 대형 퍼블리셔로서 본사의 게임만이 아니라 타사의 게임 유통도 활발하게 진행. 이런 타 기업과의 콜라보 행사나 게임 홍보, 합동 작업 등이 활발하게 이루어질 수 있는 공간의 규모와 유연성을 충분히 갖추어 게임 산업의 중심지로 발전.
                   </p>
                 </div>
               </div>
@@ -691,6 +713,11 @@ export default function App() {
               </div>
 
               <div className="bg-zinc-900/50 p-6 rounded-xl border border-white/5">
+                <h4 className="text-white font-medium mb-2 flex items-center gap-2"><Handshake className="w-4 h-4 text-red-500"/> Co-working Space</h4>
+                <p className="text-sm text-zinc-500">타사와의 협력 작업/미팅</p>
+              </div>
+
+              <div className="bg-zinc-900/50 p-6 rounded-xl border border-white/5">
                 <h4 className="text-white font-medium mb-2 flex items-center gap-2"><Coffee className="w-4 h-4 text-red-500"/> Wellness Zone</h4>
                 <p className="text-sm text-zinc-500">직원의 휴게 및 취미</p>
               </div>
@@ -739,6 +766,25 @@ export default function App() {
                   <p className="text-zinc-400 leading-relaxed">
                     동선 역할을 하는 외부의 형성된 거대한 스케일의 공간을 케노피를 통해 영역화하여 마을, 혹은 시장과 같은 분위기를 연출했다. 공간 자체는 실외이나 마치 오피스 내의 공간을 공공 공간으로 내놓은 것과 같은 효과를 내며, 분절된 매스들이 다층적인 외부 데크 공간을 만들고, 캐노피 안쪽을 향한 커튼월 유리는 시각적 연결을 제공하여 대중과 직원 간의 소통은 유지하면서 보안을 확보했다. 이때 각 매스에 서로 다른 미디어 영상을 제공하는 패널을 부착하여 시각적 이야기를 제공함으로써 각 매스의 고유성을 강조했다. 이러한 미디어 패널은 내부로의 시선은 차단하면서도 지루하거나 답답하게 느껴지지 않도록 한다.
                   </p>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* La Fabrica */}
+            <FadeIn>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h3 className="text-3xl text-white mb-6 font-display">La Fabrica</h3>
+                  <p className="text-zinc-400 leading-relaxed">
+                    내가 원하는 공간적 성격, 건축적 디자인을 모두 담은 사례이다. 시멘트 공장을 개조하여 만든 Ricardo Bofill의 건축 스튜디오 겸 주거 공간으로 대성당을 추구한 공간감, 폐공장 특유의 투박한 분위기가 건물의 용도와 모순을 형성한다. 외관에서는 도심 속에서 자연적 요소가 인공적 요소를 장악하고 있는 모습을 보이는데, 이와 같은 디자인 개념들은 건축물에 비일상성과 초현실감을 부여한다.
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <img src="https://i.postimg.cc/mrrTFH5n/image.png" alt="La Fabrica Exterior" className="rounded-xl opacity-70 hover:opacity-100 transition-opacity object-cover aspect-square" referrerPolicy="no-referrer" />
+                  <div className="grid grid-rows-2 gap-4">
+                    <img src="https://i.postimg.cc/7hS4yM56/image.png" alt="La Fabrica Interior 1" className="rounded-xl opacity-70 hover:opacity-100 transition-opacity object-cover w-full h-full" referrerPolicy="no-referrer" />
+                    <img src="https://i.postimg.cc/L5FdvYxX/image.png" alt="La Fabrica Interior 2" className="rounded-xl opacity-70 hover:opacity-100 transition-opacity object-cover w-full h-full" referrerPolicy="no-referrer" />
+                  </div>
                 </div>
               </div>
             </FadeIn>
