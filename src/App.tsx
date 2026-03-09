@@ -266,10 +266,18 @@ export default function App() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <div className="mb-24">
-              <h2 className="font-display text-4xl text-white mb-8 border-b border-white/10 pb-4">Sight</h2>
-              <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                <img src="https://i.postimg.cc/SNMcmcK4/image.png" alt="Sight Analysis" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
+              <div>
+                <h2 className="font-display text-4xl text-white mb-8 border-b border-white/10 pb-4">Sight</h2>
+                <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                  <img src="https://i.postimg.cc/SNMcmcK4/image.png" alt="Sight Analysis" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                </div>
+              </div>
+              <div>
+                <h2 className="font-display text-4xl text-white mb-8 border-b border-white/10 pb-4">Buildings</h2>
+                <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-white">
+                  <img src="https://i.postimg.cc/xCjT4VXn/image.png" alt="Buildings Analysis" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                </div>
               </div>
             </div>
           </FadeIn>
