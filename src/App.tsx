@@ -15,6 +15,7 @@ const FadeIn = ({ children, delay = 0, className = '' }: { children: React.React
 );
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState<'home' | 'synopsis' | 'site-analysis'>('home');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMapExpanded, setIsMapExpanded] = useState(false);
   const [showCombinedArts, setShowCombinedArts] = useState(false);
@@ -31,7 +32,7 @@ export default function App() {
             onClick={() => setShowCombinedArts(false)}
             className="text-white hover:text-red-500 transition-colors flex items-center gap-2 font-medium"
           >
-            ← BACK TO ARCADIA
+            ← BACK TO SYNOPSIS
           </button>
         </nav>
         
@@ -111,7 +112,7 @@ export default function App() {
             onClick={() => setShowIpExpansion(false)}
             className="text-white hover:text-red-500 transition-colors flex items-center gap-2 font-medium"
           >
-            ← BACK TO ARCADIA
+            ← BACK TO SYNOPSIS
           </button>
         </nav>
         
@@ -187,11 +188,106 @@ export default function App() {
     );
   }
 
+  if (currentPage === 'home') {
+    return (
+      <div className="min-h-screen font-sans selection:bg-red-900/50 selection:text-white bg-zinc-950 flex flex-col items-center justify-center p-6 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop')] opacity-10 bg-cover bg-center mix-blend-screen" />
+        
+        <div className="relative z-10 w-full max-w-5xl">
+          <FadeIn className="text-center mb-20">
+            <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6 tracking-tighter">
+              ARCADIA
+            </h1>
+            <p className="text-xl text-zinc-400 font-light tracking-widest uppercase">
+              Square Enix Office Architecture Project
+            </p>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <FadeIn delay={0.1}>
+              <div 
+                className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 border border-white/10 p-12 cursor-pointer hover:border-red-500/50 transition-all duration-500"
+                onClick={() => {
+                  setCurrentPage('synopsis');
+                  window.scrollTo(0, 0);
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <h2 className="font-display text-4xl text-white mb-4 flex items-center gap-4">
+                  <span className="text-red-500">01.</span> Synopsis
+                </h2>
+                <p className="text-zinc-400 text-lg">
+                  프로젝트의 배경, 컨셉, 프로그램 및 레퍼런스 분석
+                </p>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <div 
+                className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 border border-white/10 p-12 cursor-pointer hover:border-red-500/50 transition-all duration-500"
+                onClick={() => {
+                  setCurrentPage('site-analysis');
+                  window.scrollTo(0, 0);
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <h2 className="font-display text-4xl text-white mb-4 flex items-center gap-4">
+                  <span className="text-red-500">02.</span> Site Analysis
+                </h2>
+                <p className="text-zinc-400 text-lg">
+                  대상지 분석 및 환경 조사
+                </p>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (currentPage === 'site-analysis') {
+    return (
+      <div className="min-h-screen font-sans selection:bg-red-900/50 selection:text-white bg-zinc-950 text-zinc-400">
+        <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center bg-zinc-950/80 backdrop-blur-md border-b border-white/5">
+          <button 
+            onClick={() => setCurrentPage('home')}
+            className="text-white hover:text-red-500 transition-colors flex items-center gap-2 font-medium"
+          >
+            ← BACK TO HOME
+          </button>
+        </nav>
+        
+        <main className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+          <FadeIn className="text-center mb-20">
+            <h1 className="font-display text-5xl md:text-6xl text-white mb-6">Site Analysis</h1>
+            <p className="text-xl text-zinc-400">
+              대상지 분석 및 환경 조사
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <div className="mb-24">
+              <h2 className="font-display text-4xl text-white mb-8 border-b border-white/10 pb-4">Sight</h2>
+              <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                <img src="https://i.postimg.cc/SNMcmcK4/image.png" alt="Sight Analysis" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+              </div>
+            </div>
+          </FadeIn>
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen font-sans selection:bg-red-900/50 selection:text-white">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center bg-zinc-950/80 backdrop-blur-md border-b border-white/5">
-        <div className="font-display font-bold text-xl tracking-widest text-white">ARCADIA</div>
+        <button 
+          onClick={() => setCurrentPage('home')}
+          className="font-display font-bold text-xl tracking-widest text-white hover:text-red-500 transition-colors flex items-center gap-2"
+        >
+          ← HOME
+        </button>
         <div className="hidden md:flex gap-8 text-sm font-medium tracking-wide text-zinc-400">
           <a href="#prologue" className="hover:text-white transition-colors">PROLOGUE</a>
           <a href="#concept" className="hover:text-white transition-colors">CONCEPT</a>
@@ -483,6 +579,18 @@ export default function App() {
                       <h3 className="font-display text-3xl text-white mb-4">Panorama of Spaces</h3>
                       <p className="text-zinc-400 leading-relaxed">
                         공간들을 서로 연결하고 중심 공간을 파노라마처럼 감싸 다채로운 요소가 서로 관계를 맺으며 동시에 인식되는 효과를 연출한다.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                      <img src="https://i.postimg.cc/FsFFF4pV/image.png" alt="Narrative Sequence" className="w-full h-auto object-cover" referrerPolicy="no-referrer" />
+                    </div>
+                    <div className="text-left md:pl-8">
+                      <h3 className="font-display text-3xl text-white mb-4">Narrative Sequence</h3>
+                      <p className="text-zinc-400 leading-relaxed">
+                        스토리의 서사 구조처럼 오피스 속 세계에 점진적으로 몰입할 수 있도록 시퀀스를 구성한다. 진입부에는 많은 사람들이 쉽게 접근할 수 있는 가벼운 공간을, 안쪽으로 진입할수록 IP에 깊게 몰입할 수 있는 공간을 설계할 예정이다.
                       </p>
                     </div>
                   </div>
