@@ -276,7 +276,7 @@ export default function App() {
               <div>
                 <h2 className="font-display text-4xl text-white mb-8 border-b border-white/10 pb-4">Buildings</h2>
                 <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-white">
-                  <img src="https://i.postimg.cc/xCjT4VXn/image.png" alt="Buildings Analysis" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                  <img src="https://i.postimg.cc/RFvQph14/image.png" alt="Buildings Analysis" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                 </div>
               </div>
             </div>
