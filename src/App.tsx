@@ -266,17 +266,26 @@ export default function App() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
+            <div className="mb-24">
+              <h2 className="font-display text-4xl text-white mb-8 border-b border-white/10 pb-4">Urban Context</h2>
+              <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                <img src="https://i.postimg.cc/yxL1WtgX/image.png" alt="Urban Context" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+              </div>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.2}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
               <div>
                 <h2 className="font-display text-4xl text-white mb-8 border-b border-white/10 pb-4">Sight</h2>
                 <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                  <img src="https://i.postimg.cc/SNMcmcK4/image.png" alt="Sight Analysis" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                  <img src="https://i.postimg.cc/KYh2cxqq/image.png" alt="Sight Analysis" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                 </div>
               </div>
               <div>
-                <h2 className="font-display text-4xl text-white mb-8 border-b border-white/10 pb-4">Buildings</h2>
+                <h2 className="font-display text-4xl text-white mb-8 border-b border-white/10 pb-4">Node</h2>
                 <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-white">
-                  <img src="https://i.postimg.cc/RFvQph14/image.png" alt="Buildings Analysis" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                  <img src="https://i.postimg.cc/6Q8YPvLH/image.png" alt="Node Analysis" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                 </div>
               </div>
             </div>
