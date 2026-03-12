@@ -15,7 +15,7 @@ const FadeIn = ({ children, delay = 0, className = '' }: { children: React.React
 );
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'synopsis' | 'site-analysis'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'synopsis' | 'site-analysis' | 'concept'>('home');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMapExpanded, setIsMapExpanded] = useState(false);
   const [showCombinedArts, setShowCombinedArts] = useState(false);
@@ -203,10 +203,10 @@ export default function App() {
             </p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <FadeIn delay={0.1}>
               <div 
-                className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 border border-white/10 p-12 cursor-pointer hover:border-red-500/50 transition-all duration-500"
+                className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 border border-white/10 p-12 cursor-pointer hover:border-red-500/50 transition-all duration-500 h-full"
                 onClick={() => {
                   setCurrentPage('synopsis');
                   window.scrollTo(0, 0);
@@ -224,7 +224,7 @@ export default function App() {
 
             <FadeIn delay={0.2}>
               <div 
-                className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 border border-white/10 p-12 cursor-pointer hover:border-red-500/50 transition-all duration-500"
+                className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 border border-white/10 p-12 cursor-pointer hover:border-red-500/50 transition-all duration-500 h-full"
                 onClick={() => {
                   setCurrentPage('site-analysis');
                   window.scrollTo(0, 0);
@@ -239,8 +239,94 @@ export default function App() {
                 </p>
               </div>
             </FadeIn>
+
+            <FadeIn delay={0.3}>
+              <div 
+                className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 border border-white/10 p-12 cursor-pointer hover:border-red-500/50 transition-all duration-500 h-full"
+                onClick={() => {
+                  setCurrentPage('concept');
+                  window.scrollTo(0, 0);
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <h2 className="font-display text-4xl text-white mb-4 flex items-center gap-4">
+                  <span className="text-red-500">03.</span> Concept
+                </h2>
+                <p className="text-zinc-400 text-lg">
+                  프로젝트의 핵심 디자인 컨셉 및 방향성
+                </p>
+              </div>
+            </FadeIn>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  if (currentPage === 'concept') {
+    return (
+      <div className="min-h-screen font-sans selection:bg-red-900/50 selection:text-white bg-zinc-950 text-zinc-400">
+        <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center bg-zinc-950/80 backdrop-blur-md border-b border-white/5">
+          <button 
+            onClick={() => setCurrentPage('home')}
+            className="text-white hover:text-red-500 transition-colors flex items-center gap-2 font-medium"
+          >
+            ← BACK TO HOME
+          </button>
+        </nav>
+        
+        <main className="pt-20 pb-24">
+          <div className="relative w-full h-[85vh] flex items-center justify-center overflow-hidden rounded-b-[3rem] border-b border-white/10">
+            <div className="absolute inset-0 z-0">
+              <img 
+                src="https://i.postimg.cc/d3WTjzQN/Enscape-2026-03-12-13-21-22.png" 
+                alt="Concept Background" 
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            
+            <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+              <FadeIn>
+                <div className="inline-flex items-center justify-center gap-6 mb-6">
+                  <span className="text-red-500 font-display text-4xl md:text-6xl">03.</span>
+                  <div className="h-px w-16 bg-red-500/50" />
+                </div>
+                <h1 className="font-display text-7xl md:text-9xl text-white mb-8 tracking-tighter drop-shadow-2xl uppercase">
+                  Concept
+                </h1>
+                <p className="text-xl md:text-2xl text-zinc-300 font-light tracking-widest uppercase drop-shadow-lg">
+                  Core Design Direction & Philosophy
+                </p>
+              </FadeIn>
+            </div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 mt-32">
+            <FadeIn>
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+                <div className="lg:col-span-3 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                  <img 
+                    src="https://i.postimg.cc/DyGmpJzH/Enscape-2026-03-12-14-32-54.png" 
+                    alt="Concept Introduction" 
+                    className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <div className="lg:col-span-2 flex flex-col justify-center">
+                  <h2 className="font-display text-4xl md:text-5xl text-white mb-6">The Beginning of Arcadia</h2>
+                  <div className="w-12 h-1 bg-red-500 mb-8" />
+                  <p className="text-lg text-zinc-400 leading-relaxed mb-6">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </p>
+                  <p className="text-lg text-zinc-400 leading-relaxed">
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </p>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </main>
       </div>
     );
   }
