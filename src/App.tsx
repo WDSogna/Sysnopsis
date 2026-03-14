@@ -283,7 +283,7 @@ export default function App() {
           <div className="relative w-full h-[85vh] flex items-center justify-center overflow-hidden rounded-b-[3rem] border-b border-white/10">
             <div className="absolute inset-0 z-0">
               <img 
-                src="https://i.postimg.cc/v89H5R1b/Enscape-2026-03-12-13-21-22.png" 
+                src="https://i.postimg.cc/RVv78xns/image.png" 
                 alt="Concept Background" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
@@ -548,7 +548,7 @@ export default function App() {
           {/* Full-width Ending Image */}
           <div className="w-full h-[60vh] md:h-[80vh] relative mt-32">
             <img 
-              src="https://i.postimg.cc/v89H5R1b/Enscape-2026-03-12-13-21-22.png" 
+              src="https://i.postimg.cc/RVv78xns/image.png" 
               alt="Concept Ending" 
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
