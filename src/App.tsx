@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
-import { ChevronDown, Sword, Shield, Sparkles, Building2, Users, Map, MonitorPlay, ShoppingBag, Coffee, BookOpen, PenTool, DoorOpen, Handshake } from 'lucide-react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { ChevronDown, Sword, Shield, Sparkles, Building2, Users, Map, MonitorPlay, ShoppingBag, Coffee, BookOpen, PenTool, DoorOpen, Handshake, X } from 'lucide-react';
 
 const FadeIn = ({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string }) => (
   <motion.div
@@ -20,6 +20,10 @@ export default function App() {
   const [isMapExpanded, setIsMapExpanded] = useState(false);
   const [showCombinedArts, setShowCombinedArts] = useState(false);
   const [showIpExpansion, setShowIpExpansion] = useState(false);
+  const [isCreativeStudioExpanded, setIsCreativeStudioExpanded] = useState(false);
+  const [isCentralizedHubExpanded, setIsCentralizedHubExpanded] = useState(false);
+  const [isNarrativeExpanded, setIsNarrativeExpanded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
@@ -279,7 +283,7 @@ export default function App() {
           <div className="relative w-full h-[85vh] flex items-center justify-center overflow-hidden rounded-b-[3rem] border-b border-white/10">
             <div className="absolute inset-0 z-0">
               <img 
-                src="https://i.postimg.cc/d3WTjzQN/Enscape-2026-03-12-13-21-22.png" 
+                src="https://i.postimg.cc/v89H5R1b/Enscape-2026-03-12-13-21-22.png" 
                 alt="Concept Background" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
@@ -326,7 +330,262 @@ export default function App() {
               </div>
             </FadeIn>
           </div>
+
+          <div className="max-w-7xl mx-auto px-6 mt-32">
+            <FadeIn>
+              <div className="text-center mb-16">
+                <h2 className="font-display text-4xl md:text-5xl text-white mb-6">Design Process</h2>
+                <div className="w-12 h-1 bg-red-500 mx-auto" />
+              </div>
+              <div className="flex flex-col gap-16 items-center">
+                <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                  <img 
+                    src="https://i.postimg.cc/0jw2rDp1/image.png" 
+                    alt="Design Process 1" 
+                    className="w-full h-auto object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                  <img 
+                    src="https://i.postimg.cc/mgGywG22/image.png" 
+                    alt="Design Process 2" 
+                    className="w-full h-auto object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <div className="w-full mt-8">
+                  <div 
+                    className="flex justify-between items-center mb-8 border-b border-white/10 pb-4 cursor-pointer group"
+                    onClick={() => setIsCentralizedHubExpanded(!isCentralizedHubExpanded)}
+                  >
+                    <h3 className="text-2xl text-white font-medium group-hover:text-red-400 transition-colors">Centralized Hub</h3>
+                    <ChevronDown className={`w-6 h-6 text-zinc-500 transition-transform duration-300 ${isCentralizedHubExpanded ? 'rotate-180' : ''}`} />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+                    <div className="bg-zinc-900/50 p-6 rounded-xl border border-white/5 hover:border-white/20 transition-colors">
+                      <h4 className="text-white font-medium mb-2">Image Studio Division</h4>
+                      <p className="text-sm text-zinc-500">모션 캡처, 시네마틱 제작, 게임 비주얼 지원</p>
+                    </div>
+
+                    <div className="bg-zinc-900/50 p-6 rounded-xl border border-white/5 hover:border-white/20 transition-colors">
+                      <h4 className="text-white font-medium mb-2">Audio Studio</h4>
+                      <p className="text-sm text-zinc-500">음악, 효과음</p>
+                    </div>
+
+                    <div className="bg-zinc-900/50 p-6 rounded-xl border border-white/5 hover:border-white/20 transition-colors">
+                      <h4 className="text-white font-medium mb-2">Sales & Distribution / Customer Experience</h4>
+                      <p className="text-sm text-zinc-500">마케팅, 퍼블리싱, 온라인 서비스</p>
+                    </div>
+
+                    <div className="bg-zinc-900/50 p-6 rounded-xl border border-white/5 hover:border-white/20 transition-colors">
+                      <h4 className="text-white font-medium mb-2">Core Service & IT/QA</h4>
+                      <p className="text-sm text-zinc-500">기술 연구/개발/관리, 게임 검수</p>
+                    </div>
+                  </div>
+
+                  <motion.div
+                    initial={false}
+                    animate={{ height: isCentralizedHubExpanded ? 'auto' : 0, opacity: isCentralizedHubExpanded ? 1 : 0 }}
+                    className="overflow-hidden"
+                  >
+                    {/* Desktop Tree Lines */}
+                    <div className="hidden md:flex flex-col items-center pt-4">
+                      <motion.div 
+                        initial={{ height: 0 }}
+                        animate={{ height: isCentralizedHubExpanded ? 32 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-0.5 bg-red-500/50"
+                      />
+                      <div className="w-full relative">
+                        <motion.div 
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: isCentralizedHubExpanded ? 1 : 0 }}
+                          transition={{ duration: 0.3, delay: 0.2 }}
+                          className="h-0.5 bg-red-500/50 w-[66.66%] mx-auto origin-center"
+                        />
+                        <div className="flex justify-between w-[66.66%] mx-auto h-8">
+                          <motion.div initial={{ scaleY: 0 }} animate={{ scaleY: isCentralizedHubExpanded ? 1 : 0 }} transition={{ duration: 0.2, delay: 0.5 }} className="w-0.5 h-full bg-red-500/50 origin-top" />
+                          <motion.div initial={{ scaleY: 0 }} animate={{ scaleY: isCentralizedHubExpanded ? 1 : 0 }} transition={{ duration: 0.2, delay: 0.5 }} className="w-0.5 h-full bg-red-500/50 origin-top" />
+                          <motion.div initial={{ scaleY: 0 }} animate={{ scaleY: isCentralizedHubExpanded ? 1 : 0 }} transition={{ duration: 0.2, delay: 0.5 }} className="w-0.5 h-full bg-red-500/50 origin-top" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Mobile Tree Lines */}
+                    <div className="md:hidden flex flex-col items-center pt-4">
+                      <motion.div 
+                        initial={{ height: 0 }}
+                        animate={{ height: isCentralizedHubExpanded ? 32 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-0.5 bg-red-500/50"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8">
+                      <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: isCentralizedHubExpanded ? 0 : 20, opacity: isCentralizedHubExpanded ? 1 : 0 }} transition={{ delay: 0.6 }} className="bg-zinc-900/80 p-6 rounded-xl border border-red-500/20 relative">
+                        <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-red-500 hidden md:block" />
+                        <h4 className="text-white font-medium mb-3">초대형 스튜디오<br/><span className="text-sm text-red-400">Creative Studio 1, 3</span></h4>
+                        <p className="text-sm text-zinc-400 leading-relaxed">하이엔드 대규모 게임을 개발하는 핵심 스튜디오. Creative Studio 중 60% 면적과 400명 규모의 인원.</p>
+                      </motion.div>
+                      
+                      <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: isCentralizedHubExpanded ? 0 : 20, opacity: isCentralizedHubExpanded ? 1 : 0 }} transition={{ delay: 0.7 }} className="bg-zinc-900/80 p-6 rounded-xl border border-red-500/20 relative">
+                        <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-red-500 hidden md:block" />
+                        <h4 className="text-white font-medium mb-3">중대형 스튜디오<br/><span className="text-sm text-red-400">Creative Studio 2, 4</span></h4>
+                        <p className="text-sm text-zinc-400 leading-relaxed">외부 개발사와의 코워크 비중 높음. Creative Studio 중 25% 면적과 200명 규모의 인원.</p>
+                      </motion.div>
+                      
+                      <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: isCentralizedHubExpanded ? 0 : 20, opacity: isCentralizedHubExpanded ? 1 : 0 }} transition={{ delay: 0.8 }} className="bg-zinc-900/80 p-6 rounded-xl border border-red-500/20 relative">
+                        <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-red-500 hidden md:block" />
+                        <h4 className="text-white font-medium mb-3">중소형 집중 스튜디오<br/><span className="text-sm text-red-400">Creative Studio 5</span></h4>
+                        <p className="text-sm text-zinc-400 leading-relaxed">레트로 감성의 HD-2D 게임 개발. Creative Studio 중 15% 면적과 50-100명 규모의 인원.</p>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                </div>
+
+                <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                  <img 
+                    src="https://i.postimg.cc/xd6GnJGG/image.png" 
+                    alt="Design Process 3" 
+                    className="w-full h-auto object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                  <img 
+                    src="https://i.postimg.cc/DZqxFyzN/image.png" 
+                    alt="Design Process 4" 
+                    className="w-full h-auto object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 mt-32 mb-32">
+            <FadeIn>
+              <div className="text-center mb-16">
+                <h2 className="font-display text-4xl md:text-5xl text-white mb-6">Narrative of Arcadia</h2>
+                <div className="w-12 h-1 bg-red-500 mx-auto" />
+              </div>
+
+              <div className="flex flex-col items-center">
+                {/* Main Image */}
+                <div 
+                  className="w-full max-w-5xl rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 cursor-pointer group relative"
+                  onClick={() => setIsNarrativeExpanded(!isNarrativeExpanded)}
+                >
+                  <img 
+                    src="https://i.postimg.cc/tRsMYyMN/image.png" 
+                    alt="Narrative of Arcadia Main" 
+                    className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                  <div className="absolute bottom-6 right-6 bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center gap-2">
+                    <span className="text-white text-sm">Click to expand</span>
+                    <ChevronDown className={`w-4 h-4 text-white transition-transform duration-500 ${isNarrativeExpanded ? 'rotate-180' : ''}`} />
+                  </div>
+                </div>
+
+                {/* Expandable Content */}
+                <motion.div
+                  initial={false}
+                  animate={{ height: isNarrativeExpanded ? 'auto' : 0, opacity: isNarrativeExpanded ? 1 : 0 }}
+                  className="overflow-hidden w-full max-w-5xl mt-12"
+                >
+                  {/* Horizontal Line Container */}
+                  <div className="relative w-full h-1 bg-zinc-800 rounded-full mb-12">
+                    <motion.div 
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: isNarrativeExpanded ? 1 : 0 }}
+                      transition={{ duration: 1.5, ease: "easeInOut" }}
+                      className="absolute top-0 left-0 h-full bg-red-500 rounded-full origin-left"
+                    />
+                  </div>
+
+                  {/* 4 Images Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {[
+                      "https://i.postimg.cc/rwHdy10Q/Enscape-2026-03-13-22-20-08.png",
+                      "https://i.postimg.cc/RCTNJ5Jt/Enscape-2026-03-12-12-39-33.png",
+                      "https://i.postimg.cc/cJdzHnpL/Enscape-2026-03-12-12-41-45.png",
+                      "https://i.postimg.cc/V5yGcrqx/Enscape-2026-03-12-12-43-07.png"
+                    ].map((src, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ 
+                          opacity: isNarrativeExpanded ? 1 : 0, 
+                          y: isNarrativeExpanded ? 0 : 20 
+                        }}
+                        transition={{ 
+                          duration: 0.5, 
+                          delay: isNarrativeExpanded ? 0.3 + (index * 0.3) : 0 
+                        }}
+                        className="rounded-2xl overflow-hidden border border-white/10 shadow-xl bg-zinc-900/50"
+                      >
+                        <img 
+                          src={src} 
+                          alt={`Narrative Sequence ${index + 1}`} 
+                          className="w-full h-auto object-cover aspect-video cursor-pointer hover:opacity-80 transition-opacity"
+                          referrerPolicy="no-referrer"
+                          onClick={() => setSelectedImage(src)}
+                        />
+                        <div className="p-4 text-center border-t border-white/5">
+                          <span className="text-zinc-500 font-mono text-sm">Phase 0{index + 1}</span>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
+            </FadeIn>
+          </div>
+
+          {/* Full-width Ending Image */}
+          <div className="w-full h-[60vh] md:h-[80vh] relative mt-32">
+            <img 
+              src="https://i.postimg.cc/v89H5R1b/Enscape-2026-03-12-13-21-22.png" 
+              alt="Concept Ending" 
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
+          </div>
         </main>
+
+        {/* Image Modal */}
+        <AnimatePresence>
+          {selectedImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 cursor-pointer"
+              onClick={() => setSelectedImage(null)}
+            >
+              <motion.img
+                initial={{ scale: 0.95 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.95 }}
+                src={selectedImage}
+                alt="Enlarged view"
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl cursor-default"
+                onClick={(e) => e.stopPropagation()}
+                referrerPolicy="no-referrer"
+              />
+              <button
+                className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors"
+                onClick={() => setSelectedImage(null)}
+              >
+                <X className="w-8 h-8" />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   }
@@ -853,11 +1112,38 @@ export default function App() {
             <FadeIn delay={0.1} className="flex flex-col gap-6">
               <h3 className="text-2xl text-white font-medium border-b border-white/10 pb-4">주요 업무 시설</h3>
               
-              <div className="bg-zinc-900/50 p-6 rounded-xl border border-white/5">
-                <h4 className="text-white font-medium mb-2 flex items-center gap-2"><MonitorPlay className="w-4 h-4 text-red-500"/> Creative Studio</h4>
+              <div 
+                className="bg-zinc-900/50 p-6 rounded-xl border border-white/5 cursor-pointer hover:border-white/20 transition-colors"
+                onClick={() => setIsCreativeStudioExpanded(!isCreativeStudioExpanded)}
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <h4 className="text-white font-medium flex items-center gap-2"><MonitorPlay className="w-4 h-4 text-red-500"/> Creative Studio</h4>
+                  <ChevronDown className={`w-4 h-4 text-zinc-500 transition-transform duration-300 ${isCreativeStudioExpanded ? 'rotate-180' : ''}`} />
+                </div>
                 <p className="text-sm text-zinc-500">기획, 프로그래밍, 3D/2D 아트 디자인</p>
+                
+                <motion.div
+                  initial={false}
+                  animate={{ height: isCreativeStudioExpanded ? 'auto' : 0, opacity: isCreativeStudioExpanded ? 1 : 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="flex flex-col gap-4 pt-4 mt-4 border-t border-white/10">
+                    <div>
+                      <h5 className="text-white text-sm font-medium mb-1">초대형 스튜디오 (Creative Studio 1, 3)</h5>
+                      <p className="text-xs text-zinc-400 leading-relaxed">하이엔드 대규모 게임을 개발하는 핵심 스튜디오. Creative Studio 중 60% 면적과 400명 규모의 인원.</p>
+                    </div>
+                    <div>
+                      <h5 className="text-white text-sm font-medium mb-1">중대형 스튜디오 (Creative Studio 2, 4)</h5>
+                      <p className="text-xs text-zinc-400 leading-relaxed">외부 개발사와의 코워크 비중 높음. Creative Studio 중 25% 면적과 200명 규모의 인원.</p>
+                    </div>
+                    <div>
+                      <h5 className="text-white text-sm font-medium mb-1">중소형 집중 스튜디오 (Creative Studio 5)</h5>
+                      <p className="text-xs text-zinc-400 leading-relaxed">레트로 감성의 HD-2D 게임 개발. Creative Studio 중 15% 면적과 50-100명 규모의 인원.</p>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
-              
+
               <div className="bg-zinc-900/50 p-6 rounded-xl border border-white/5">
                 <h4 className="text-white font-medium mb-2">Image Studio Division</h4>
                 <p className="text-sm text-zinc-500">모션 캡처, 시네마틱 제작, 게임 비주얼 지원</p>
