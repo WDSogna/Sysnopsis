@@ -545,15 +545,18 @@ export default function App() {
             </FadeIn>
           </div>
 
-          {/* Full-width Ending Image */}
-          <div className="w-full h-[60vh] md:h-[80vh] relative mt-32">
-            <img 
-              src="https://i.postimg.cc/RVv78xns/image.png" 
-              alt="Concept Ending" 
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
+          {/* Ending Image Container */}
+          <div className="max-w-7xl mx-auto px-6 mt-32 mb-32">
+            <FadeIn>
+              <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                <img 
+                  src="https://i.postimg.cc/RVv78xns/image.png" 
+                  alt="Concept Ending" 
+                  className="w-full h-auto object-contain"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </FadeIn>
           </div>
         </main>
 
