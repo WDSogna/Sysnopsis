@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { ChevronDown, Sword, Shield, Sparkles, Building2, Users, Map, MonitorPlay, ShoppingBag, Coffee, BookOpen, PenTool, DoorOpen, Handshake, X } from 'lucide-react';
 
@@ -24,6 +24,40 @@ export default function App() {
   const [isCentralizedHubExpanded, setIsCentralizedHubExpanded] = useState(false);
   const [isNarrativeExpanded, setIsNarrativeExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [showMaterialLines, setShowMaterialLines] = useState(false);
+  const material1Ref = useRef<HTMLDivElement>(null);
+  const material2Ref = useRef<HTMLDivElement>(null);
+  const material4Ref = useRef<HTMLDivElement>(null);
+  const materialsContainerRef = useRef<HTMLDivElement>(null);
+  const [pathCoords, setPathCoords] = useState({ m1x: 0, m1y: 0, m2x: 0, m2y: 0, m4x: 0, m4y: 0, offsetX: 0 });
+
+  useEffect(() => {
+    const updateCoords = () => {
+      if (showMaterialLines && material1Ref.current && material2Ref.current && material4Ref.current && materialsContainerRef.current) {
+        const containerRect = materialsContainerRef.current.getBoundingClientRect();
+        const m1Rect = material1Ref.current.getBoundingClientRect();
+        const m2Rect = material2Ref.current.getBoundingClientRect();
+        const m4Rect = material4Ref.current.getBoundingClientRect();
+
+        setPathCoords({
+          m1x: m1Rect.left - containerRect.left,
+          m1y: m1Rect.top + m1Rect.height / 2 - containerRect.top,
+          m2x: m2Rect.left - containerRect.left,
+          m2y: m2Rect.top + m2Rect.height / 2 - containerRect.top,
+          m4x: m4Rect.left - containerRect.left,
+          m4y: m4Rect.top + m4Rect.height / 2 - containerRect.top,
+          offsetX: m1Rect.left - containerRect.left - 40,
+        });
+      }
+    };
+
+    if (showMaterialLines) {
+      updateCoords();
+      window.addEventListener('resize', updateCoords);
+      return () => window.removeEventListener('resize', updateCoords);
+    }
+  }, [showMaterialLines, currentPage]);
+  
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
@@ -754,76 +788,105 @@ export default function App() {
                       <div className="w-12 h-1 bg-red-500 mx-auto md:mx-0" />
                     </div>
 
-                    <div className="flex flex-col gap-16">
-                      {/* Material 1 */}
-                      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                        <div className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
-                          <img 
-                            src="https://i.postimg.cc/NMchs1qt/image.png" 
-                            alt="Transparent LED Film" 
-                            className="w-full h-full object-cover"
-                            referrerPolicy="no-referrer"
+                    <div className="relative" ref={materialsContainerRef}>
+                      {/* Interactive SVG Lines */}
+                      {showMaterialLines && (
+                        <svg className="absolute inset-0 pointer-events-none z-10 overflow-visible" style={{ width: '100%', height: '100%' }}>
+                          <motion.path 
+                            d={`M ${pathCoords.m1x} ${pathCoords.m1y} L ${pathCoords.offsetX} ${pathCoords.m1y} L ${pathCoords.offsetX} ${pathCoords.m2y} L ${pathCoords.m2x} ${pathCoords.m2y}`}
+                            fill="none" stroke="#ef4444" strokeWidth="3" strokeDasharray="8,8" strokeLinejoin="round"
+                            initial={{ pathLength: 0, opacity: 0 }}
+                            animate={{ pathLength: 1, opacity: 1 }}
+                            transition={{ duration: 0.8, ease: "easeInOut" }}
                           />
-                        </div>
-                        <div className="flex flex-col justify-center pt-2 md:pt-4">
-                          <h3 className="font-display text-3xl text-white mb-4">Transparent LED Film</h3>
-                          <p className="text-zinc-400 leading-relaxed text-lg break-keep">
-                            필름 내부에 LED 픽셀이 배열된 방식, 자체 발광 방식으로 햇빛의 영향을 덜 받으며 선명한 영상 구현 가능. LED 소자의 크기와 배치에 따라 유리에 가까운 투명도를 얻을 수 있으며, 부착 형태에 제한이 거의 없음. 에너지 효율 높음. 햇빛을 차단하는 효과는 거의 없으며, 그 자체로는 얇고 파손될 가능성이 있기에 넓은 프레임에 적용하기 위해서는 단단한 재료와의 결합 및 보호 조치 필요. 또한 밀도가 낮거나 크기가 작으면 선명한 영상을 보기 위한 시야각이 제한적일 수 있음.
-                          </p>
-                        </div>
-                      </div>
+                          <motion.path 
+                            d={`M ${pathCoords.m1x} ${pathCoords.m1y} L ${pathCoords.offsetX} ${pathCoords.m1y} L ${pathCoords.offsetX} ${pathCoords.m4y} L ${pathCoords.m4x} ${pathCoords.m4y}`}
+                            fill="none" stroke="#ef4444" strokeWidth="3" strokeDasharray="8,8" strokeLinejoin="round"
+                            initial={{ pathLength: 0, opacity: 0 }}
+                            animate={{ pathLength: 1, opacity: 1 }}
+                            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
+                          />
+                        </svg>
+                      )}
 
-                      {/* Material 2 */}
-                      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                        <div className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
-                          <img 
-                            src="https://i.postimg.cc/XNxMWGsm/image.png" 
-                            alt="PDLC Smart Glass" 
-                            className="w-full h-full object-cover"
-                            referrerPolicy="no-referrer"
-                          />
+                      <div className="flex flex-col gap-16 relative z-20">
+                        {/* Material 1 */}
+                        <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                          <div 
+                            ref={material1Ref}
+                            onClick={() => setShowMaterialLines(!showMaterialLines)}
+                            className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 cursor-pointer hover:ring-2 hover:ring-red-500 transition-all relative group"
+                          >
+                            <img 
+                              src="https://i.postimg.cc/NMchs1qt/image.png" 
+                              alt="Transparent LED Film" 
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              referrerPolicy="no-referrer"
+                            />
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                              <span className="text-white font-medium tracking-wider text-sm border border-white/30 px-4 py-2 rounded-full backdrop-blur-sm">CLICK TO CONNECT</span>
+                            </div>
+                          </div>
+                          <div className="flex flex-col justify-center pt-2 md:pt-4">
+                            <h3 className="font-display text-3xl text-white mb-4">Transparent LED Film</h3>
+                            <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                              필름 내부에 LED 픽셀이 배열된 방식, 자체 발광 방식으로 햇빛의 영향을 덜 받으며 선명한 영상 구현 가능. LED 소자의 크기와 배치에 따라 유리에 가까운 투명도를 얻을 수 있으며, 부착 형태에 제한이 거의 없음. 에너지 효율 높음. 햇빛을 차단하는 효과는 거의 없으며, 그 자체로는 얇고 파손될 가능성이 있기에 넓은 프레임에 적용하기 위해서는 단단한 재료와의 결합 및 보호 조치 필요. 또한 밀도가 낮거나 크기가 작으면 선명한 영상을 보기 위한 시야각이 제한적일 수 있음.
+                            </p>
+                          </div>
                         </div>
-                        <div className="flex flex-col justify-center pt-2 md:pt-4">
-                          <h3 className="font-display text-3xl text-white mb-4">PDLC Smart Glass</h3>
-                          <p className="text-zinc-400 leading-relaxed text-lg break-keep">
-                            전기신호에 따라 투명도가 조절되는 유리. 전기가 흐를 경우 투명해지며, 차단하면 불투명해져 상황에 따라 유동적으로 조절 가능. 일사를 효과적으로 차단. 불투명할 경우 빔 프로젝터를 투영할 수 있으며, 비교적 매끄러운 재질감. 습기에 취약.
-                          </p>
-                        </div>
-                      </div>
 
-                      {/* Material 3 */}
-                      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                        <div className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
-                          <img 
-                            src="https://i.postimg.cc/9fJWn8qH/image.png" 
-                            alt="Media Mesh" 
-                            className="w-full h-full object-cover"
-                            referrerPolicy="no-referrer"
-                          />
+                        {/* Material 2 */}
+                        <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                          <div ref={material2Ref} className={`w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border shadow-2xl bg-zinc-900/20 transition-all duration-500 ${showMaterialLines ? 'border-red-500/50 shadow-red-500/20' : 'border-white/10'}`}>
+                            <img 
+                              src="https://i.postimg.cc/XNxMWGsm/image.png" 
+                              alt="PDLC Smart Glass" 
+                              className="w-full h-full object-cover"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                          <div className="flex flex-col justify-center pt-2 md:pt-4">
+                            <h3 className="font-display text-3xl text-white mb-4">PDLC Smart Glass</h3>
+                            <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                              전기신호에 따라 투명도가 조절되는 유리. 전기가 흐를 경우 투명해지며, 차단하면 불투명해져 상황에 따라 유동적으로 조절 가능. 일사를 효과적으로 차단. 불투명할 경우 빔 프로젝터를 투영할 수 있으며, 비교적 매끄러운 재질감. 습기에 취약.
+                            </p>
+                          </div>
                         </div>
-                        <div className="flex flex-col justify-center pt-2 md:pt-4">
-                          <h3 className="font-display text-3xl text-white mb-4">Media Mesh</h3>
-                          <p className="text-zinc-400 leading-relaxed text-lg break-keep">
-                            금속 격자 (Metal Fabric)의 교차점에 LED를 심는 방식으로 자체 발광하여 햇빛의 영향을 크게 받지 않음. 가볍기 때문에 하중에 큰 영향을 주지 않고, 높은 내구성과 자유로운 형태가 가능하다는 장점이 있으나, 화소 밀도가 높지는 않아 고품질 영상을 원할 시에는 부적합. 금속 격자가 루버와 비슷한 방식으로 일사를 일부 차단.
-                          </p>
-                        </div>
-                      </div>
 
-                      {/* Material 4 */}
-                      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                        <div className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
-                          <img 
-                            src="https://i.postimg.cc/ThMGDBBY/image.png" 
-                            alt="Fritted Glass" 
-                            className="w-full h-full object-cover"
-                            referrerPolicy="no-referrer"
-                          />
+                        {/* Material 3 */}
+                        <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                          <div className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                            <img 
+                              src="https://i.postimg.cc/9fJWn8qH/image.png" 
+                              alt="Media Mesh" 
+                              className="w-full h-full object-cover"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                          <div className="flex flex-col justify-center pt-2 md:pt-4">
+                            <h3 className="font-display text-3xl text-white mb-4">Media Mesh</h3>
+                            <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                              금속 격자 (Metal Fabric)의 교차점에 LED를 심는 방식으로 자체 발광하여 햇빛의 영향을 크게 받지 않음. 가볍기 때문에 하중에 큰 영향을 주지 않고, 높은 내구성과 자유로운 형태가 가능하다는 장점이 있으나, 화소 밀도가 높지는 않아 고품질 영상을 원할 시에는 부적합. 금속 격자가 루버와 비슷한 방식으로 일사를 일부 차단.
+                            </p>
+                          </div>
                         </div>
-                        <div className="flex flex-col justify-center pt-2 md:pt-4">
-                          <h3 className="font-display text-3xl text-white mb-4">Fritted Glass</h3>
-                          <p className="text-zinc-400 leading-relaxed text-lg break-keep">
-                            유리에 미세한 세라믹에나멜을 융합시켜 패턴을 이용해 유리를 반투명하게 가공. 내구성이 높아지고 패턴에 따라 다양한 질감이나 형상, 햇빛 투과율, 시야 등을 조절 가능. 빛 투과율에 따라 빔 프로젝터로 투영 가능
-                          </p>
+
+                        {/* Material 4 */}
+                        <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                          <div ref={material4Ref} className={`w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border shadow-2xl bg-zinc-900/20 transition-all duration-500 ${showMaterialLines ? 'border-red-500/50 shadow-red-500/20' : 'border-white/10'}`}>
+                            <img 
+                              src="https://i.postimg.cc/ThMGDBBY/image.png" 
+                              alt="Fritted Glass" 
+                              className="w-full h-full object-cover"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                          <div className="flex flex-col justify-center pt-2 md:pt-4">
+                            <h3 className="font-display text-3xl text-white mb-4">Fritted Glass</h3>
+                            <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                              유리에 미세한 세라믹에나멜을 융합시켜 패턴을 이용해 유리를 반투명하게 가공. 내구성이 높아지고 패턴에 따라 다양한 질감이나 형상, 햇빛 투과율, 시야 등을 조절 가능. 빛 투과율에 따라 빔 프로젝터로 투영 가능
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
