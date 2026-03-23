@@ -15,7 +15,7 @@ const FadeIn = ({ children, delay = 0, className = '' }: { children: React.React
 );
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'synopsis' | 'site-analysis' | 'concept'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'synopsis' | 'site-analysis' | 'concept' | 'develop'>('home');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMapExpanded, setIsMapExpanded] = useState(false);
   const [showCombinedArts, setShowCombinedArts] = useState(false);
@@ -207,7 +207,7 @@ export default function App() {
             </p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <FadeIn delay={0.1}>
               <div 
                 className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 border border-white/10 p-12 cursor-pointer hover:border-red-500/50 transition-all duration-500 h-full"
@@ -258,6 +258,24 @@ export default function App() {
                 </h2>
                 <p className="text-zinc-400 text-lg">
                   프로젝트의 핵심 디자인 컨셉 및 방향성
+                </p>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.4}>
+              <div 
+                className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 border border-white/10 p-12 cursor-pointer hover:border-red-500/50 transition-all duration-500 h-full"
+                onClick={() => {
+                  setCurrentPage('develop');
+                  window.scrollTo(0, 0);
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <h2 className="font-display text-4xl text-white mb-4 flex items-center gap-4">
+                  <span className="text-red-500">04.</span> Develop
+                </h2>
+                <p className="text-zinc-400 text-lg">
+                  디자인 발전 과정 및 상세 계획
                 </p>
               </div>
             </FadeIn>
@@ -490,6 +508,16 @@ export default function App() {
                   </div>
                 </div>
 
+                {/* Secondary Image */}
+                <div className="w-full max-w-5xl mt-8 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                  <img 
+                    src="https://i.postimg.cc/PfyPR5pN/image.png" 
+                    alt="Narrative of Arcadia Secondary" 
+                    className="w-full h-auto object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+
                 {/* Expandable Content */}
                 <motion.div
                   initial={false}
@@ -589,6 +617,222 @@ export default function App() {
             </motion.div>
           )}
         </AnimatePresence>
+      </div>
+    );
+  }
+
+  if (currentPage === 'develop') {
+    return (
+      <div className="min-h-screen font-sans selection:bg-red-900/50 selection:text-white bg-zinc-950 text-zinc-400">
+        <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center bg-zinc-950/80 backdrop-blur-md border-b border-white/5">
+          <button 
+            onClick={() => setCurrentPage('home')}
+            className="text-white hover:text-red-500 transition-colors flex items-center gap-2 font-medium"
+          >
+            ← BACK TO HOME
+          </button>
+        </nav>
+
+        <main className="pt-32 pb-24">
+          <div className="max-w-7xl mx-auto px-6">
+            <FadeIn>
+              <div className="text-center mb-16">
+                <div className="inline-flex items-center justify-center gap-6 mb-6">
+                  <span className="text-red-500 font-display text-4xl md:text-6xl">04.</span>
+                  <div className="h-px w-16 bg-red-500/50" />
+                </div>
+                <h1 className="font-display text-6xl md:text-8xl text-white mb-6 tracking-tighter uppercase">
+                  Develop
+                </h1>
+                <p className="text-xl text-zinc-400 font-light tracking-widest uppercase">
+                  Design Development Process
+                </p>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <div className="flex flex-col gap-12 items-center">
+                {/* Bridge Section */}
+                <div className="w-full">
+                  <div className="mb-8 text-center md:text-left">
+                    <h2 className="font-display text-4xl md:text-5xl text-white mb-4">Bridge</h2>
+                    <div className="w-12 h-1 bg-red-500 mx-auto md:mx-0" />
+                  </div>
+                  
+                  {/* Copied Design Process Image 2 */}
+                  <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 mb-16">
+                    <img 
+                      src="https://i.postimg.cc/mgGywG22/image.png" 
+                      alt="Bridge Design Process" 
+                      className="w-full h-auto object-contain"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+
+                  {/* Two New Images Horizontally */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                    <div className="flex flex-col gap-6">
+                      <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                        <img 
+                          src="https://i.postimg.cc/Hkhsk7jC/image.png" 
+                          alt="Urban Street" 
+                          className="w-full h-auto object-contain"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                      <div className="text-center px-4">
+                        <h3 className="font-display text-2xl text-white mb-4">Urban Street</h3>
+                        <p className="text-zinc-400 leading-relaxed text-sm md:text-base break-keep">
+                          선형적인 길의 성격을 강화하여 오피스 외부의 대각선 두 노드를 이어주는 도시 가로로써의 성격을 부여한다. 사람들의 자연스러운 통행으로 비롯하여 복합 문화 오피스의 도시 광장 역할을 강화하고, 게임에 관심이 없는 사람이라 할지라도 자연스러운 유입이 가능하도록 만든다.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-6">
+                      <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                        <img 
+                          src="https://i.postimg.cc/BvTywdrc/image.png" 
+                          alt="Ramp of Square" 
+                          className="w-full h-auto object-contain"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                      <div className="text-center px-4">
+                        <h3 className="font-display text-2xl text-white mb-4">Ramp of Square</h3>
+                        <p className="text-zinc-400 leading-relaxed text-sm md:text-base break-keep">
+                          다리에 경사를 주어 썬큰 공간과 지상이 하나로 통합되는 연결로 역할을 하도록 만든다. 이는 오피스 저층부의 입체적 경험을 강화하며, 건물을 관통하는 메인 컨셉 자체가 Universal Design의 성격을 띠게 된다. 또한 램프를 따라 진입하는 과정이 점차 웅장해지고, 몰입되는 서사적 시퀀스를 강조할 수 있다.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SCREEN Section */}
+                <div className="w-full mt-16">
+                  <div className="mb-8 text-center md:text-left">
+                    <h2 className="font-display text-4xl md:text-5xl text-white mb-4 uppercase">SCREEN</h2>
+                    <div className="w-12 h-1 bg-red-500 mx-auto md:mx-0" />
+                  </div>
+                  
+                  {/* Main Image */}
+                  <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                    <img 
+                      src="https://i.postimg.cc/MTPgw19J/image.png" 
+                      alt="SCREEN Design Process" 
+                      className="w-full h-auto object-contain"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+
+                  {/* Diagram Image */}
+                  <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mt-12 w-full">
+                    <div className="w-full md:w-[28rem] lg:w-[32rem] shrink-0 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                      <img 
+                        src="https://i.postimg.cc/ZqBLngP2/image.png" 
+                        alt="Grand Atrium for Event" 
+                        className="w-full h-auto object-contain"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center text-center md:text-left px-4 md:px-0">
+                      <h3 className="font-display text-3xl md:text-4xl text-white mb-4">Grand Atrium for Event</h3>
+                      <h4 className="text-xl text-red-500 font-medium mb-6">Showcase, Concert, Promotion & Finale</h4>
+                      <div className="flex flex-col gap-4 text-zinc-400 leading-relaxed text-sm md:text-base break-keep">
+                        <p>
+                          서사적 시퀀스의 종점이자, 건물 전체에 입체적 개방감을 제공하는 대공간은 평소에는 라운지로 쓰이지만 동시에 복합 문화 오피스의 중심으로써 게임 쇼케이스, 공연, 홍보 등 대규모 행사가 이루어지는 장소가 된다.
+                        </p>
+                        <p>
+                          이를 위해 두 면을 가득 채우는 스크린을 배치했다. 각종 시네마틱, 쇼케이스와 홍보 자료, 비주얼 이펙트를 주는 역할을 수행하며 행사가 없을 때는 은은한 햇빛을 제외한 외부의 경관을 차단하고, 하늘의 텍스처만을 받아들여 세계관에 온전히 몰입할 수 있는 환경을 조성한다. 이때 중앙 모서리를 수직적으로 비움으로써 사람에 따라 이야기가 끝나 닫히는, 혹은 새로운 이야기가 시작되는 거대한 문으로 해석되며 서사적 시퀀스의 종막을 메타포적으로 연출하고자 했다.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Materials Study */}
+                  <div className="w-full mt-24">
+                    <div className="mb-12 text-center md:text-left">
+                      <h2 className="font-display text-4xl text-white mb-4">Materials Study</h2>
+                      <div className="w-12 h-1 bg-red-500 mx-auto md:mx-0" />
+                    </div>
+
+                    <div className="flex flex-col gap-16">
+                      {/* Material 1 */}
+                      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                        <div className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                          <img 
+                            src="https://i.postimg.cc/NMchs1qt/image.png" 
+                            alt="Transparent LED Film" 
+                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <div className="flex flex-col justify-center pt-2 md:pt-4">
+                          <h3 className="font-display text-3xl text-white mb-4">Transparent LED Film</h3>
+                          <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                            필름 내부에 LED 픽셀이 배열된 방식, 자체 발광 방식으로 햇빛의 영향을 덜 받으며 선명한 영상 구현 가능. LED 소자의 크기와 배치에 따라 유리에 가까운 투명도를 얻을 수 있으며, 부착 형태에 제한이 거의 없음. 에너지 효율 높음. 햇빛을 차단하는 효과는 거의 없으며, 그 자체로는 얇고 파손될 가능성이 있기에 넓은 프레임에 적용하기 위해서는 단단한 재료와의 결합 및 보호 조치 필요. 또한 밀도가 낮거나 크기가 작으면 선명한 영상을 보기 위한 시야각이 제한적일 수 있음.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Material 2 */}
+                      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                        <div className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                          <img 
+                            src="https://i.postimg.cc/XNxMWGsm/image.png" 
+                            alt="PDLC Smart Glass" 
+                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <div className="flex flex-col justify-center pt-2 md:pt-4">
+                          <h3 className="font-display text-3xl text-white mb-4">PDLC Smart Glass</h3>
+                          <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                            전기신호에 따라 투명도가 조절되는 유리. 전기가 흐를 경우 투명해지며, 차단하면 불투명해져 상황에 따라 유동적으로 조절 가능. 일사를 효과적으로 차단. 불투명할 경우 빔 프로젝터를 투영할 수 있으며, 비교적 매끄러운 재질감. 습기에 취약.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Material 3 */}
+                      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                        <div className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                          <img 
+                            src="https://i.postimg.cc/9fJWn8qH/image.png" 
+                            alt="Media Mesh" 
+                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <div className="flex flex-col justify-center pt-2 md:pt-4">
+                          <h3 className="font-display text-3xl text-white mb-4">Media Mesh</h3>
+                          <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                            금속 격자 (Metal Fabric)의 교차점에 LED를 심는 방식으로 자체 발광하여 햇빛의 영향을 크게 받지 않음. 가볍기 때문에 하중에 큰 영향을 주지 않고, 높은 내구성과 자유로운 형태가 가능하다는 장점이 있으나, 화소 밀도가 높지는 않아 고품질 영상을 원할 시에는 부적합. 금속 격자가 루버와 비슷한 방식으로 일사를 일부 차단.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Material 4 */}
+                      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                        <div className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                          <img 
+                            src="https://i.postimg.cc/ThMGDBBY/image.png" 
+                            alt="Fritted Glass" 
+                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <div className="flex flex-col justify-center pt-2 md:pt-4">
+                          <h3 className="font-display text-3xl text-white mb-4">Fritted Glass</h3>
+                          <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                            유리에 미세한 세라믹에나멜을 융합시켜 패턴을 이용해 유리를 반투명하게 가공. 내구성이 높아지고 패턴에 따라 다양한 질감이나 형상, 햇빛 투과율, 시야 등을 조절 가능. 빛 투과율에 따라 빔 프로젝터로 투영 가능
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </main>
       </div>
     );
   }
