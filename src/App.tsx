@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { ChevronDown, Sword, Shield, Sparkles, Building2, Users, Map, MonitorPlay, ShoppingBag, Coffee, BookOpen, PenTool, DoorOpen, Handshake, X } from 'lucide-react';
 
-const FadeIn = ({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string }) => (
+const FadeIn: React.FC<{ children: React.ReactNode, delay?: number, className?: string }> = ({ children, delay = 0, className = '' }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -15,7 +15,7 @@ const FadeIn = ({ children, delay = 0, className = '' }: { children: React.React
 );
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'synopsis' | 'site-analysis' | 'concept' | 'develop'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'synopsis' | 'site-analysis' | 'concept' | 'develop' | 'develop2'>('home');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMapExpanded, setIsMapExpanded] = useState(false);
   const [showCombinedArts, setShowCombinedArts] = useState(false);
@@ -241,7 +241,7 @@ export default function App() {
             </p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="flex flex-col gap-6 w-full max-w-3xl mx-auto">
             <FadeIn delay={0.1}>
               <div 
                 className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 border border-white/10 p-12 cursor-pointer hover:border-red-500/50 transition-all duration-500 h-full"
@@ -306,10 +306,28 @@ export default function App() {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <h2 className="font-display text-4xl text-white mb-4 flex items-center gap-4">
-                  <span className="text-red-500">04.</span> Develop
+                  <span className="text-red-500">04.</span> Develop 1
                 </h2>
                 <p className="text-zinc-400 text-lg">
-                  디자인 발전 과정 및 상세 계획
+                  디자인 발전 과정 및 상세 계획 1
+                </p>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.5}>
+              <div 
+                className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 border border-white/10 p-12 cursor-pointer hover:border-red-500/50 transition-all duration-500 h-full"
+                onClick={() => {
+                  setCurrentPage('develop2');
+                  window.scrollTo(0, 0);
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <h2 className="font-display text-4xl text-white mb-4 flex items-center gap-4">
+                  <span className="text-red-500">05.</span> Develop 2
+                </h2>
+                <p className="text-zinc-400 text-lg">
+                  디자인 발전 과정 및 상세 계획 2
                 </p>
               </div>
             </FadeIn>
@@ -676,18 +694,172 @@ export default function App() {
                   <div className="h-px w-16 bg-red-500/50" />
                 </div>
                 <h1 className="font-display text-6xl md:text-8xl text-white mb-6 tracking-tighter uppercase">
-                  Develop
+                  Develop 1
                 </h1>
                 <p className="text-xl text-zinc-400 font-light tracking-widest uppercase">
-                  Design Development Process
+                  Design Development Process 1
                 </p>
               </div>
             </FadeIn>
 
             <FadeIn delay={0.2}>
               <div className="flex flex-col gap-12 items-center">
-                {/* Bridge Section */}
+                
+                {/* SCREEN Section */}
                 <div className="w-full">
+                  <div className="mb-8 text-center md:text-left">
+                    <h2 className="font-display text-4xl md:text-5xl text-white mb-4 uppercase">SCREEN</h2>
+                    <div className="w-12 h-1 bg-red-500 mx-auto md:mx-0" />
+                  </div>
+                  
+                  {/* Main Image */}
+                  <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                    <img 
+                      src="https://i.postimg.cc/MTPgw19J/image.png" 
+                      alt="SCREEN Design Process" 
+                      className="w-full h-auto object-contain"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+
+                  {/* Diagram Image */}
+                  <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mt-12 w-full">
+                    <div className="w-full md:w-[28rem] lg:w-[32rem] shrink-0 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                      <img 
+                        src="https://i.postimg.cc/ZqBLngP2/image.png" 
+                        alt="Grand Atrium for Event" 
+                        className="w-full h-auto object-contain"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center text-center md:text-left px-4 md:px-0">
+                      <h3 className="font-display text-3xl md:text-4xl text-white mb-4">Grand Atrium for Event</h3>
+                      <h4 className="text-xl text-red-500 font-medium mb-6">Showcase, Concert, Promotion & Finale</h4>
+                      <div className="flex flex-col gap-4 text-zinc-400 leading-relaxed text-sm md:text-base break-keep">
+                        <p>
+                          서사적 시퀀스의 종점이자, 건물 전체에 입체적 개방감을 제공하는 대공간은 평소에는 라운지로 쓰이지만 동시에 복합 문화 오피스의 중심으로써 게임 쇼케이스, 공연, 홍보 등 대규모 행사가 이루어지는 장소가 된다.
+                        </p>
+                        <p>
+                          이를 위해 두 면을 가득 채우는 스크린을 배치했다. 각종 시네마틱, 쇼케이스와 홍보 자료, 비주얼 이펙트를 주는 역할을 수행하며 행사가 없을 때는 은은한 햇빛을 제외한 외부의 경관을 차단하고, 하늘의 텍스처만을 받아들여 세계관에 온전히 몰입할 수 있는 환경을 조성한다. 이때 중앙 모서리를 수직적으로 비움으로써 사람에 따라 이야기가 끝나 닫히는, 혹은 새로운 이야기가 시작되는 거대한 문으로 해석되며 서사적 시퀀스의 종막을 메타포적으로 연출하고자 했다.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Materials Study */}
+                <div className="w-full mt-24">
+                  <div className="mb-12 text-center md:text-left">
+                    <h2 className="font-display text-4xl text-white mb-4">Materials Study</h2>
+                    <div className="w-12 h-1 bg-red-500 mx-auto md:mx-0" />
+                  </div>
+
+                  <div className="relative" ref={materialsContainerRef}>
+                    {/* Interactive SVG Lines */}
+                    {showMaterialLines && (
+                      <svg className="absolute inset-0 pointer-events-none z-10 overflow-visible" style={{ width: '100%', height: '100%' }}>
+                        <motion.path 
+                          d={`M ${pathCoords.m1x} ${pathCoords.m1y} L ${pathCoords.offsetX} ${pathCoords.m1y} L ${pathCoords.offsetX} ${pathCoords.m2y} L ${pathCoords.m2x} ${pathCoords.m2y}`}
+                          fill="none" stroke="#ef4444" strokeWidth="3" strokeDasharray="8,8" strokeLinejoin="round"
+                          initial={{ pathLength: 0, opacity: 0 }}
+                          animate={{ pathLength: 1, opacity: 1 }}
+                          transition={{ duration: 0.8, ease: "easeInOut" }}
+                        />
+                        <motion.path 
+                          d={`M ${pathCoords.m1x} ${pathCoords.m1y} L ${pathCoords.offsetX} ${pathCoords.m1y} L ${pathCoords.offsetX} ${pathCoords.m4y} L ${pathCoords.m4x} ${pathCoords.m4y}`}
+                          fill="none" stroke="#ef4444" strokeWidth="3" strokeDasharray="8,8" strokeLinejoin="round"
+                          initial={{ pathLength: 0, opacity: 0 }}
+                          animate={{ pathLength: 1, opacity: 1 }}
+                          transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
+                        />
+                      </svg>
+                    )}
+
+                    <div className="flex flex-col gap-16 relative z-20">
+                      {/* Material 1 */}
+                      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                        <div 
+                          ref={material1Ref}
+                          onClick={() => setShowMaterialLines(!showMaterialLines)}
+                          className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 cursor-pointer hover:ring-2 hover:ring-red-500 transition-all relative group"
+                        >
+                          <img 
+                            src="https://i.postimg.cc/NMchs1qt/image.png" 
+                            alt="Transparent LED Film" 
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            referrerPolicy="no-referrer"
+                          />
+                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span className="text-white font-medium tracking-wider text-sm border border-white/30 px-4 py-2 rounded-full backdrop-blur-sm">CLICK TO CONNECT</span>
+                          </div>
+                        </div>
+                        <div className="flex flex-col justify-center pt-2 md:pt-4">
+                          <h3 className="font-display text-3xl text-white mb-4">Transparent LED Film</h3>
+                          <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                            필름 내부에 LED 픽셀이 배열된 방식, 자체 발광 방식으로 햇빛의 영향을 덜 받으며 선명한 영상 구현 가능. LED 소자의 크기와 배치에 따라 유리에 가까운 투명도를 얻을 수 있으며, 부착 형태에 제한이 거의 없음. 에너지 효율 높음. 햇빛을 차단하는 효과는 거의 없으며, 그 자체로는 얇고 파손될 가능성이 있기에 넓은 프레임에 적용하기 위해서는 단단한 재료와의 결합 및 보호 조치 필요. 또한 밀도가 낮거나 크기가 작으면 선명한 영상을 보기 위한 시야각이 제한적일 수 있음.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Material 2 */}
+                      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                        <div ref={material2Ref} className={`w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border shadow-2xl bg-zinc-900/20 transition-all duration-500 ${showMaterialLines ? 'border-red-500/50 shadow-red-500/20' : 'border-white/10'}`}>
+                          <img 
+                            src="https://i.postimg.cc/XNxMWGsm/image.png" 
+                            alt="PDLC Smart Glass" 
+                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <div className="flex flex-col justify-center pt-2 md:pt-4">
+                          <h3 className="font-display text-3xl text-white mb-4">PDLC Smart Glass</h3>
+                          <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                            전기신호에 따라 투명도가 조절되는 유리. 전기가 흐를 경우 투명해지며, 차단하면 불투명해져 상황에 따라 유동적으로 조절 가능. 일사를 효과적으로 차단. 불투명할 경우 빔 프로젝터를 투영할 수 있으며, 비교적 매끄러운 재질감. 습기에 취약.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Material 3 */}
+                      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                        <div className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                          <img 
+                            src="https://i.postimg.cc/9fJWn8qH/image.png" 
+                            alt="Media Mesh" 
+                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <div className="flex flex-col justify-center pt-2 md:pt-4">
+                          <h3 className="font-display text-3xl text-white mb-4">Media Mesh</h3>
+                          <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                            금속 격자 (Metal Fabric)의 교차점에 LED를 심는 방식으로 자체 발광하여 햇빛의 영향을 크게 받지 않음. 가볍기 때문에 하중에 큰 영향을 주지 않고, 높은 내구성과 자유로운 형태가 가능하다는 장점이 있으나, 화소 밀도가 높지는 않아 고품질 영상을 원할 시에는 부적합. 금속 격자가 루버와 비슷한 방식으로 일사를 일부 차단.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Material 4 */}
+                      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                        <div ref={material4Ref} className={`w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border shadow-2xl bg-zinc-900/20 transition-all duration-500 ${showMaterialLines ? 'border-red-500/50 shadow-red-500/20' : 'border-white/10'}`}>
+                          <img 
+                            src="https://i.postimg.cc/ThMGDBBY/image.png" 
+                            alt="Fritted Glass" 
+                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <div className="flex flex-col justify-center pt-2 md:pt-4">
+                          <h3 className="font-display text-3xl text-white mb-4">Fritted Glass</h3>
+                          <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                            유리에 미세한 세라믹에나멜을 융합시켜 패턴을 이용해 유리를 반투명하게 가공. 내구성이 높아지고 패턴에 따라 다양한 질감이나 형상, 햇빛 투과율, 시야 등을 조절 가능. 빛 투과율에 따라 빔 프로젝터로 투영 가능
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bridge Section */}
+                <div className="w-full mt-24">
                   <div className="mb-8 text-center md:text-left">
                     <h2 className="font-display text-4xl md:text-5xl text-white mb-4">Bridge</h2>
                     <div className="w-12 h-1 bg-red-500 mx-auto md:mx-0" />
@@ -740,162 +912,262 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* SCREEN Section */}
-                <div className="w-full mt-16">
-                  <div className="mb-8 text-center md:text-left">
-                    <h2 className="font-display text-4xl md:text-5xl text-white mb-4 uppercase">SCREEN</h2>
-                    <div className="w-12 h-1 bg-red-500 mx-auto md:mx-0" />
-                  </div>
-                  
-                  {/* Main Image */}
-                  <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
-                    <img 
-                      src="https://i.postimg.cc/MTPgw19J/image.png" 
-                      alt="SCREEN Design Process" 
-                      className="w-full h-auto object-contain"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-
-                  {/* Diagram Image */}
-                  <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mt-12 w-full">
-                    <div className="w-full md:w-[28rem] lg:w-[32rem] shrink-0 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
-                      <img 
-                        src="https://i.postimg.cc/ZqBLngP2/image.png" 
-                        alt="Grand Atrium for Event" 
-                        className="w-full h-auto object-contain"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-center text-center md:text-left px-4 md:px-0">
-                      <h3 className="font-display text-3xl md:text-4xl text-white mb-4">Grand Atrium for Event</h3>
-                      <h4 className="text-xl text-red-500 font-medium mb-6">Showcase, Concert, Promotion & Finale</h4>
-                      <div className="flex flex-col gap-4 text-zinc-400 leading-relaxed text-sm md:text-base break-keep">
-                        <p>
-                          서사적 시퀀스의 종점이자, 건물 전체에 입체적 개방감을 제공하는 대공간은 평소에는 라운지로 쓰이지만 동시에 복합 문화 오피스의 중심으로써 게임 쇼케이스, 공연, 홍보 등 대규모 행사가 이루어지는 장소가 된다.
-                        </p>
-                        <p>
-                          이를 위해 두 면을 가득 채우는 스크린을 배치했다. 각종 시네마틱, 쇼케이스와 홍보 자료, 비주얼 이펙트를 주는 역할을 수행하며 행사가 없을 때는 은은한 햇빛을 제외한 외부의 경관을 차단하고, 하늘의 텍스처만을 받아들여 세계관에 온전히 몰입할 수 있는 환경을 조성한다. 이때 중앙 모서리를 수직적으로 비움으로써 사람에 따라 이야기가 끝나 닫히는, 혹은 새로운 이야기가 시작되는 거대한 문으로 해석되며 서사적 시퀀스의 종막을 메타포적으로 연출하고자 했다.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Materials Study */}
-                  <div className="w-full mt-24">
-                    <div className="mb-12 text-center md:text-left">
-                      <h2 className="font-display text-4xl text-white mb-4">Materials Study</h2>
-                      <div className="w-12 h-1 bg-red-500 mx-auto md:mx-0" />
-                    </div>
-
-                    <div className="relative" ref={materialsContainerRef}>
-                      {/* Interactive SVG Lines */}
-                      {showMaterialLines && (
-                        <svg className="absolute inset-0 pointer-events-none z-10 overflow-visible" style={{ width: '100%', height: '100%' }}>
-                          <motion.path 
-                            d={`M ${pathCoords.m1x} ${pathCoords.m1y} L ${pathCoords.offsetX} ${pathCoords.m1y} L ${pathCoords.offsetX} ${pathCoords.m2y} L ${pathCoords.m2x} ${pathCoords.m2y}`}
-                            fill="none" stroke="#ef4444" strokeWidth="3" strokeDasharray="8,8" strokeLinejoin="round"
-                            initial={{ pathLength: 0, opacity: 0 }}
-                            animate={{ pathLength: 1, opacity: 1 }}
-                            transition={{ duration: 0.8, ease: "easeInOut" }}
-                          />
-                          <motion.path 
-                            d={`M ${pathCoords.m1x} ${pathCoords.m1y} L ${pathCoords.offsetX} ${pathCoords.m1y} L ${pathCoords.offsetX} ${pathCoords.m4y} L ${pathCoords.m4x} ${pathCoords.m4y}`}
-                            fill="none" stroke="#ef4444" strokeWidth="3" strokeDasharray="8,8" strokeLinejoin="round"
-                            initial={{ pathLength: 0, opacity: 0 }}
-                            animate={{ pathLength: 1, opacity: 1 }}
-                            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
-                          />
-                        </svg>
-                      )}
-
-                      <div className="flex flex-col gap-16 relative z-20">
-                        {/* Material 1 */}
-                        <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                          <div 
-                            ref={material1Ref}
-                            onClick={() => setShowMaterialLines(!showMaterialLines)}
-                            className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 cursor-pointer hover:ring-2 hover:ring-red-500 transition-all relative group"
-                          >
-                            <img 
-                              src="https://i.postimg.cc/NMchs1qt/image.png" 
-                              alt="Transparent LED Film" 
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                              referrerPolicy="no-referrer"
-                            />
-                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                              <span className="text-white font-medium tracking-wider text-sm border border-white/30 px-4 py-2 rounded-full backdrop-blur-sm">CLICK TO CONNECT</span>
-                            </div>
-                          </div>
-                          <div className="flex flex-col justify-center pt-2 md:pt-4">
-                            <h3 className="font-display text-3xl text-white mb-4">Transparent LED Film</h3>
-                            <p className="text-zinc-400 leading-relaxed text-lg break-keep">
-                              필름 내부에 LED 픽셀이 배열된 방식, 자체 발광 방식으로 햇빛의 영향을 덜 받으며 선명한 영상 구현 가능. LED 소자의 크기와 배치에 따라 유리에 가까운 투명도를 얻을 수 있으며, 부착 형태에 제한이 거의 없음. 에너지 효율 높음. 햇빛을 차단하는 효과는 거의 없으며, 그 자체로는 얇고 파손될 가능성이 있기에 넓은 프레임에 적용하기 위해서는 단단한 재료와의 결합 및 보호 조치 필요. 또한 밀도가 낮거나 크기가 작으면 선명한 영상을 보기 위한 시야각이 제한적일 수 있음.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Material 2 */}
-                        <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                          <div ref={material2Ref} className={`w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border shadow-2xl bg-zinc-900/20 transition-all duration-500 ${showMaterialLines ? 'border-red-500/50 shadow-red-500/20' : 'border-white/10'}`}>
-                            <img 
-                              src="https://i.postimg.cc/XNxMWGsm/image.png" 
-                              alt="PDLC Smart Glass" 
-                              className="w-full h-full object-cover"
-                              referrerPolicy="no-referrer"
-                            />
-                          </div>
-                          <div className="flex flex-col justify-center pt-2 md:pt-4">
-                            <h3 className="font-display text-3xl text-white mb-4">PDLC Smart Glass</h3>
-                            <p className="text-zinc-400 leading-relaxed text-lg break-keep">
-                              전기신호에 따라 투명도가 조절되는 유리. 전기가 흐를 경우 투명해지며, 차단하면 불투명해져 상황에 따라 유동적으로 조절 가능. 일사를 효과적으로 차단. 불투명할 경우 빔 프로젝터를 투영할 수 있으며, 비교적 매끄러운 재질감. 습기에 취약.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Material 3 */}
-                        <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                          <div className="w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
-                            <img 
-                              src="https://i.postimg.cc/9fJWn8qH/image.png" 
-                              alt="Media Mesh" 
-                              className="w-full h-full object-cover"
-                              referrerPolicy="no-referrer"
-                            />
-                          </div>
-                          <div className="flex flex-col justify-center pt-2 md:pt-4">
-                            <h3 className="font-display text-3xl text-white mb-4">Media Mesh</h3>
-                            <p className="text-zinc-400 leading-relaxed text-lg break-keep">
-                              금속 격자 (Metal Fabric)의 교차점에 LED를 심는 방식으로 자체 발광하여 햇빛의 영향을 크게 받지 않음. 가볍기 때문에 하중에 큰 영향을 주지 않고, 높은 내구성과 자유로운 형태가 가능하다는 장점이 있으나, 화소 밀도가 높지는 않아 고품질 영상을 원할 시에는 부적합. 금속 격자가 루버와 비슷한 방식으로 일사를 일부 차단.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Material 4 */}
-                        <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                          <div ref={material4Ref} className={`w-full md:w-64 shrink-0 aspect-square rounded-3xl overflow-hidden border shadow-2xl bg-zinc-900/20 transition-all duration-500 ${showMaterialLines ? 'border-red-500/50 shadow-red-500/20' : 'border-white/10'}`}>
-                            <img 
-                              src="https://i.postimg.cc/ThMGDBBY/image.png" 
-                              alt="Fritted Glass" 
-                              className="w-full h-full object-cover"
-                              referrerPolicy="no-referrer"
-                            />
-                          </div>
-                          <div className="flex flex-col justify-center pt-2 md:pt-4">
-                            <h3 className="font-display text-3xl text-white mb-4">Fritted Glass</h3>
-                            <p className="text-zinc-400 leading-relaxed text-lg break-keep">
-                              유리에 미세한 세라믹에나멜을 융합시켜 패턴을 이용해 유리를 반투명하게 가공. 내구성이 높아지고 패턴에 따라 다양한 질감이나 형상, 햇빛 투과율, 시야 등을 조절 가능. 빛 투과율에 따라 빔 프로젝터로 투영 가능
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </FadeIn>
           </div>
         </main>
+      </div>
+    );
+  }
+
+  if (currentPage === 'develop2') {
+    return (
+      <div className="min-h-screen font-sans selection:bg-red-900/50 selection:text-white bg-zinc-950 text-zinc-400">
+        <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center bg-zinc-950/80 backdrop-blur-md border-b border-white/5">
+          <button 
+            onClick={() => setCurrentPage('home')}
+            className="text-white hover:text-red-500 transition-colors flex items-center gap-2 font-medium"
+          >
+            ← BACK TO HOME
+          </button>
+        </nav>
+
+        <main className="pt-32 pb-24">
+          <div className="max-w-7xl mx-auto px-6">
+            <FadeIn>
+              <div className="text-center mb-16">
+                <div className="inline-flex items-center justify-center gap-6 mb-6">
+                  <span className="text-red-500 font-display text-4xl md:text-6xl">05.</span>
+                  <div className="h-px w-16 bg-red-500/50" />
+                </div>
+                <h1 className="font-display text-6xl md:text-8xl text-white mb-6 tracking-tighter uppercase">
+                  Develop 2
+                </h1>
+                <p className="text-xl text-zinc-400 font-light tracking-widest uppercase">
+                  Design Development Process 2
+                </p>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <div className="flex flex-col gap-12 items-center">
+                
+                {/* Develop 2 Content */}
+                <div className="w-full">
+                  <div className="mb-8 text-center md:text-left">
+                    <h2 className="font-display text-4xl md:text-5xl text-white mb-4 uppercase">Concept Review</h2>
+                    <div className="w-12 h-1 bg-red-500 mx-auto md:mx-0" />
+                  </div>
+
+                  <div className="w-full flex flex-col gap-16">
+                    <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                      <img 
+                        src="https://i.postimg.cc/VkPf2GHQ/image.png" 
+                        alt="Develop 2 Design Process 1" 
+                        className="w-full h-auto object-contain"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                  
+                  <div className="flex flex-col gap-8 w-full">
+                    <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                      <img 
+                        src="https://i.postimg.cc/yxBdcf4H/image.png" 
+                        alt="Branching Narrative" 
+                        className="w-full h-auto object-contain"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center text-center md:text-left px-4 md:px-2">
+                      <h3 className="font-display text-3xl md:text-4xl text-white mb-2">Branching Narrative</h3>
+                      <h4 className="text-xl text-red-500 font-medium mb-6">Main Story & Sub Story</h4>
+                      <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                        오피스 내부 공간을 판타지 세계 속 지역, 혹은 그 지역에서 일어나는 서사 그 자체로 본다면 그 스토리라인은 프롤로그에서 3개의 분기로 나누어져 공간적 시퀀스들을 형성하고, 결말부에서 모이게 된다. 시작점과 끝점은 같으나 그 공간으로 향하는 과정에서 어떤 경로를 선택했느냐에 따라 겪는 경험이 사람마다 서로 다른 서사를 가지도록 만들고, 결말이 가지는 의미 또한 그에 따라 달라진다.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col md:flex-row gap-12 w-full items-center">
+                    <div className="w-full md:w-1/3 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20">
+                      <img 
+                        src="https://i.postimg.cc/9007DW6N/자산_2.png" 
+                        alt="Accumulation" 
+                        className="w-full h-auto object-contain"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                    <div className="w-full md:w-2/3 flex flex-col justify-center text-center md:text-left px-4 md:px-2">
+                      <h3 className="font-display text-3xl md:text-4xl text-white mb-6">Accumulation</h3>
+                      <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                        시퀀스에 따라 입구에서 목적지까지 가는 과정은 일종의 축적이다. 플레이어가 게임을 플레이하며 얻는 아이템, 스펙 성장, NPC와의 관계, 각 지역에 대한 경험 등 스토리를 진행하며 얻게 되는 모든 것들이 점점 축적되며 증대되고, 그것 자체가 경험으로써 완성되는 웅장한 판타지 세계가 된다. Arcadia는 그러한 축적에 속해 있는 각종 요소들을 직육면체 메스로 보고, 그 군집들의 높이 변화를 통해 판타지 세계(서사)를 조형적으로 메타포하고자 했다. 그렇게 축적된 세계는 결말을 상징하는 마지막 유리 입면체를 감싸면서 경험을 통한 판타지 세계가 결말을 이루게 되는 것을 시퀀스적으로 구성하게 된다. 최종적으로 건물의 조형성 자체가 점진적인 요소들의 축적과 그로써 완성되는 판타지 세계의 웅장함을 상징하도록 하고자 했다.
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div className="w-full mt-24">
+                  <div className="mb-8 text-center md:text-left">
+                    <h2 className="font-display text-4xl md:text-5xl text-white mb-4 uppercase">Concept Develop</h2>
+                    <div className="w-12 h-1 bg-red-500 mx-auto md:mx-0" />
+                  </div>
+
+                  <div className="w-full flex flex-col gap-12">
+                    <div className="flex flex-col md:flex-row gap-8 w-full">
+                      <div className="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 flex">
+                        <img 
+                          src="https://i.postimg.cc/LXLHvGjw/jasan-3.png" 
+                          alt="Concept Develop 1" 
+                          className="w-full h-full object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                      <div className="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 flex">
+                        <img 
+                          src="https://i.postimg.cc/sXYr57rR/jasan-4.png" 
+                          alt="Concept Develop 2" 
+                          className="w-full h-full object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col justify-center text-center md:text-left px-4 md:px-2">
+                      <h3 className="font-display text-3xl md:text-4xl text-white mb-2">Penetration</h3>
+                      <h4 className="text-xl text-red-500 font-medium mb-6">Interactive Narrative</h4>
+                      <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                        서브스토리를 이루는 메스의 조형을 그대로 확장하여 메인 스토리인 브릿지로 침투시킴으로써 서브 스토리와 메인 스토리 간의 상호작용을 일으키고, 경험하는 사람으로 하여금 자신이 직접 의도를 가지고 이동한다기보다는 서사를 경험하는 과정에서 자연스럽게 판타지 세계의 여러 지역이나 스토리, 관계 등을 접하게 되는 공간을 만들고자 한다.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col mt-12 w-full">
+                      <h3 className="font-display text-3xl md:text-4xl text-white mb-8 text-center md:text-left px-4 md:px-2">Gallery</h3>
+                      <div className="flex flex-col w-full">
+                        <h4 className="text-xl text-red-500 font-medium mb-6 px-4 md:px-2 text-center md:text-left">Reference</h4>
+                        <div className="flex flex-col md:flex-row gap-8 w-full">
+                          <div className="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 flex">
+                            <img 
+                              src="https://i.postimg.cc/7h0HLdB7/image.png" 
+                              alt="Gallery 1" 
+                              className="w-full h-full object-cover"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                          <div className="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 flex">
+                            <img 
+                              src="https://i.postimg.cc/GmcLcMv0/스크린샷_2026_03_28_170850.png" 
+                              alt="Gallery 2" 
+                              className="w-full h-full object-cover"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col md:flex-row gap-12 w-full mt-32">
+                        <div className="w-full md:w-1/2 flex flex-col justify-between text-center md:text-left px-4 md:px-2">
+                          <h4 className="text-xl text-red-500 font-medium mb-6">Extract & List</h4>
+                          <div className="mt-auto">
+                            <p className="text-zinc-400 leading-relaxed text-lg break-keep mb-6">
+                              대부분의 콘솔, 스토리 게임에는 결말까지 전부 플레이한 후 여운 속에서 훑어보게 되는 갤러리(아카이브, 콜렉션)이라는 콘텐츠가 존재한다. 플레이어의 게임 플레이에 따라 음악, 스토리, 관계도, CG, 트로피 등이 하나씩 해금되고 그것 자체가 경험으로써의 판타지가 되어 갤러리에 정리된다. 즉, 갤러리는 플레이어가 경험한 판타지 세계를 정리된 형태로 보여주는 회고록이나 마찬가지이다. Arcadia에서는 이를 공간적으로 풀고자 했다.
+                            </p>
+                            <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                              매스가 점점 축적되어 이루어진 세계는 결말이라는 거대한 유리 메스를 감싸게 된다. 즉 판타지 세계를 이루는 내용들을 매스 안쪽에 위치하여 밖에서는 조형을 통해서만 그 세계의 다채로운 내용들을 간접적으로 느낄 수밖에 없다. 그래서 Arcadia에서는 매스에 축적된 내용들을 결말부에 플랫폼 형태로 층층이 뽑아냈다. 판타지 게임을 제작하는 과정에서 발생한 모든 결과물은 점점 축적되어 결말부에 도달한 사람들을 감싸 안는 웅장한 판타지 세계가 되고, 그 세세한 내용들이 각 플랫폼으로 추출되어 전시 또는 보관이라는 형태로 저장 및 수직적으로 목록화된다. 이는 결말 이후에 그 여운을 가지고 판타지 세계가 창조 및 경험되었던 궤적을 다시 한 번 훑어볼 수 있게 한다. 또한 그러한 행위 자체가 제작자와 플레이어의 스토리라인을 전시라는 수단으로 연결시킬 수 있는 건축적 시퀀스를 형성한다.
+                            </p>
+                          </div>
+                        </div>
+                        <div className="w-full md:w-1/2 flex flex-col gap-8">
+                          <div className="w-full md:w-auto max-w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 flex self-start">
+                            <img 
+                              src="https://i.postimg.cc/W4Kyt3FQ/자산_6.png" 
+                              alt="Extract & List 1" 
+                              className="w-full h-auto object-contain"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                          <div 
+                            className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 flex cursor-pointer hover:opacity-90 transition-opacity"
+                            onClick={() => setSelectedImage('https://i.postimg.cc/ZY9drqBS/자산_8.png')}
+                          >
+                            <img 
+                              src="https://i.postimg.cc/ZY9drqBS/자산_8.png" 
+                              alt="Extract & List 2" 
+                              className="w-full h-auto object-contain"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col w-full mt-32 gap-12">
+                        <div className="flex flex-col md:flex-row gap-12 w-full items-center">
+                          <div className="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 flex">
+                            <img 
+                              src="https://i.postimg.cc/bvTcmbJm/seukeulinsyas-2026-03-28-182354.png" 
+                              alt="Detail Design 1" 
+                              className="w-full h-auto object-contain"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                          <div className="w-full md:w-1/2 flex flex-col justify-center text-center md:text-left px-4 md:px-2">
+                            <h4 className="text-xl text-red-500 font-medium mb-6">Detail Design</h4>
+                            <p className="text-zinc-400 leading-relaxed text-lg break-keep">
+                              선형적인 플랫폼에 일부 라운지를 돌출시킴으로써 정적인 휴식 공간을 형성한다. 그리고 이러한 라운지를 수직적으로 감싸는 유리 입면체로 마감하여 수평적인 플랫폼이 과도하게 강조되지 않고, 기존 디자인 언어와 조화를 이룰 수 있도록 하고자 했다.
+                            </p>
+                          </div>
+                        </div>
+                        <div 
+                          className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/20 flex cursor-pointer hover:opacity-90 transition-opacity"
+                          onClick={() => setSelectedImage('https://i.postimg.cc/T2k2d8TN/Enscape_2026_03_28_18_26_52.png')}
+                        >
+                          <img 
+                            src="https://i.postimg.cc/T2k2d8TN/Enscape_2026_03_28_18_26_52.png" 
+                            alt="Detail Design 2" 
+                            className="w-full h-auto object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                </div>
+
+              </div>
+            </FadeIn>
+          </div>
+        </main>
+
+        {/* Image Modal */}
+        <AnimatePresence>
+          {selectedImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 cursor-pointer"
+              onClick={() => setSelectedImage(null)}
+            >
+              <motion.img
+                initial={{ scale: 0.95 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.95 }}
+                src={selectedImage}
+                alt="Enlarged view"
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl cursor-default"
+                onClick={(e) => e.stopPropagation()}
+                referrerPolicy="no-referrer"
+              />
+              <button
+                className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors"
+                onClick={() => setSelectedImage(null)}
+              >
+                <X className="w-8 h-8" />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   }
